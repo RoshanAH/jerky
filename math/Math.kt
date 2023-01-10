@@ -60,7 +60,7 @@ fun newtonMethodSolve(
   return if (guess in lowerBound..upperBound) guess else throw IllegalArgumentException("newtons method did not converge")
 }
 
-fun binarySearch(
+fun bisectionMethodSolve(
     function: (Double) -> Double,
     lowerBound: Double,
     upperBound: Double,
@@ -69,6 +69,7 @@ fun binarySearch(
   val guess = (lowerBound + upperBound) * 0.5
   val error = function(guess)
   return if(abs(error) <= precision) guess
-    else if(error < 0.0) binarySearch(function, guess, upperBound, precision)
-    else binarySearch(function, lowerBound, guess, precision)
+    else if(upperBound - lowerBound < precision * 2) throw IllegalArgumentException("bisection method did not converge")
+    else if(error < 0.0) bisectionMethodSolve(function, guess, upperBound, precision)
+    else bisectionMethodSolve(function, lowerBound, guess, precision)
 }
