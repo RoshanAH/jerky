@@ -11,7 +11,7 @@ fun quadratic(a: Double, b: Double, c: Double) =
         (-b - sqrt(b.pow(2.0) - 4 * a * c)) / (2 * a),
     )
 
-// DO NOT USE THIS EXCESSIVELY as multiple layers of derivitives will take long to compute
+// DO NOT USE THIS EXCESSIVELY as multiple layers of derivatives will take long to compute
 val ((Double) -> Double).derivative: (Double) -> Double
   get() = {
     val point = this(it)
@@ -37,4 +37,38 @@ fun newtonMethodSolve(
     error = abs(out)
   }
   return guess
+}
+
+fun newtonMethodSolve(
+    function: (Double) -> Double,
+    lowerBound: Double,
+    upperBound: Double,
+    initialGuess: Double = (lowerBound + upperBound) * 0.5,
+    precision: Double = 1e-13,
+): Double {
+  var guess = initialGuess
+  var error = -1.0
+
+  while (error < 0 || error > precision) {
+    val out = function(guess)
+    // dx is scaled by the output of the function in order to compensate for double rounding
+    val derivative = function.derivative(guess)
+    val delta = -out / derivative
+    guess += delta
+    error = abs(out)
+  }
+  return if (guess in lowerBound..upperBound) guess else throw IllegalArgumentException("newtons method did not converge")
+}
+
+fun binarySearch(
+    function: (Double) -> Double,
+    lowerBound: Double,
+    upperBound: Double,
+    precision: Double = 1e-13,
+): Double{
+  val guess = (lowerBound + upperBound) * 0.5
+  val error = function(guess)
+  return if(abs(error) <= precision) guess
+    else if(error < 0.0) binarySearch(function, guess, upperBound, precision)
+    else binarySearch(function, lowerBound, guess, precision)
 }
