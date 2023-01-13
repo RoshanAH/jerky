@@ -3,8 +3,8 @@ package com.roshanah.jerky.profiling
 import com.roshanah.jerky.math.Angle
 import com.roshanah.jerky.math.Pose
 import com.roshanah.jerky.math.Vec2
-import com.roshanah.jerky.math.binarySearch
 import com.roshanah.jerky.math.rad
+import com.roshanah.jerky.math.bisectionMethodSolve
 import com.roshanah.jerky.utils.DriveConstants
 import kotlin.math.abs
 import kotlin.math.sign
@@ -65,7 +65,8 @@ internal constructor(val constants: DriveConstants, val theta: Angle, val vi: Po
 
     // val w = newtonMethodSolve(displacementFun, constants.maxVelocity * 0.5)
     val max = constants.maxVelocity / (2 * constants.trackRadius) * sign(dTheta.rad)
-    val w = binarySearch(displacementFun, min(0.0, max), max(0.0, max))
+    println(max)
+    val w = bisectionMethodSolve(displacementFun, min(0.0, max), max(0.0, max))
 
     // return if (true){ // TODO fix this bug
     //   val speedUp = interpolateVelocities(Pose(vi, 0.0), Pose(halfway, w * sign(dTheta.rad)))

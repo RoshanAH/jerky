@@ -68,8 +68,9 @@ fun bisectionMethodSolve(
 ): Double{
   val guess = (lowerBound + upperBound) * 0.5
   val error = function(guess)
+  // println(guess)
   return if(abs(error) <= precision) guess
-    else if(upperBound - lowerBound < precision * 2) throw IllegalArgumentException("bisection method did not converge")
+    // else if(upperBound - lowerBound < precision * 0.25) throw IllegalArgumentException("bisection method did not converge")
     else if(error < 0.0) bisectionMethodSolve(function, guess, upperBound, precision)
     else bisectionMethodSolve(function, lowerBound, guess, precision)
 }
