@@ -44,17 +44,16 @@ class Mat2(val x1: Double, val y1: Double, val x2: Double, val y2: Double) : Lin
       Vec2(other.x * x1 + other.y * x2, other.x * y1 + other.y * y2)
 
   companion object{
+    val identity: Mat2
+      get() = Mat2(1.0, 0.0, 0.0, 1.0)
 
+    fun rotation(theta: Angle) = 
+        Mat2(
+           cos(theta),
+           sin(theta),
+          -sin(theta),
+           cos(theta)
+        )
   }
 }
 
-val identity: Mat2
-  get() = Mat2(1.0, 0.0, 0.0, 1.0)
-
-fun rotation(theta: Angle) = 
-    Mat2(
-       cos(theta),
-       sin(theta),
-      -sin(theta),
-       cos(theta)
-    )
