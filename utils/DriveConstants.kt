@@ -2,7 +2,6 @@ package com.roshanah.jerky.utils
 
 import com.roshanah.jerky.math.Pose
 import com.roshanah.jerky.math.Vec2
-import com.roshanah.jerky.math.rotation
 import com.roshanah.jerky.math.sin
 import com.roshanah.jerky.math.cos
 import com.roshanah.jerky.math.Mat2
@@ -34,7 +33,7 @@ data class DriveConstants(
     val w = motion.vel.heading
     val alpha = motion.accel.heading
 
-    val rot = rotation(-theta) // rotation matrix
+    val rot = Mat2.rotation(-theta) // rotation matrix
     val rotPrime =
         Mat2(sin(theta), cos(theta), -cos(theta), sin(theta)) * w // derivative of rotation matrix
 

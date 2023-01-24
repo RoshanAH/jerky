@@ -18,6 +18,9 @@ class Vec3(val x: Double, val y: Double, val z: Double) : Linear<Vec3>{
     val unit: Vec3
       get() = this / magnitude
 
+    val xy: Vec2
+      get() = Vec2(x, y)
+
     fun setMagnitude(r: Double) = normalize() * r
 
     fun add(other: Vec3) = Vec3(x + other.x, y + other.y, z + other.z)

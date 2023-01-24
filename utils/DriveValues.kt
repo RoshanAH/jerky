@@ -2,7 +2,6 @@ package com.roshanah.jerky.utils
 
 import com.roshanah.jerky.math.Linear
 import com.roshanah.jerky.math.Pose
-import com.roshanah.jerky.math.rotation
 import com.roshanah.jerky.math.sin
 import com.roshanah.jerky.math.cos
 import com.roshanah.jerky.math.Mat2

@@ -3,7 +3,6 @@ package com.roshanah.jerky.utils
 import com.roshanah.jerky.utils.DriveConstants
 import com.roshanah.jerky.utils.DriveValues
 import com.roshanah.jerky.math.Pose
-import com.roshanah.jerky.math.rotation
 import com.roshanah.jerky.math.Vec2
 import com.roshanah.jerky.profiling.Derivatives
 import kotlin.math.abs

@@ -18,12 +18,21 @@ class Mat3(
 ) : Linear<Mat3> {
 
   val det: Double
-    get() =  x1 * (y2 * z3 - y3 * z2)
-           - x2 * (y1 * z3 - y3 * z1)
-           + x3 * (y1 * z2 - y2 * z1)
+    get() = x1 * (y2 * z3 - y3 * z2) - x2 * (y1 * z3 - y3 * z1) + x3 * (y1 * z2 - y2 * z1)
 
   val inv: Mat3
-    get() = this / det
+    get() = Mat3(
+        (y2 * z3 - y3 * z2), -(y1 * z3 - y3 * z1),  (y1 * z2 - y2 * z1),
+       -(x2 * z3 - x3 * z2),  (x1 * z3 - x3 * z1), -(x1 * z2 - x2 * z1),   
+        (x2 * y3 - x3 * y2), -(x1 * y3 - x3 * y1),  (x1 * y2 - x2 * y1),
+    ) / det
+
+  val columns: List<Vec3>
+    get() = listOf(
+              Vec3(x1, y1, z1),
+              Vec3(x2, y2, z2),
+              Vec3(x3, y3, z3),
+            )
 
   override fun plus(other: Mat3) =
       Mat3(
@@ -68,13 +77,13 @@ class Mat3(
       Mat3(
         other.x1 * x1 + other.y1 * x2 + other.z1 * x3,    
         other.x1 * y1 + other.y1 * y2 + other.z1 * y3,    
-        other.x1 * z1 + other.y1 * z2 + other.z1 * x3,    
+        other.x1 * z1 + other.y1 * z2 + other.z1 * z3,    
         other.x2 * x1 + other.y2 * x2 + other.z2 * x3,    
         other.x2 * y1 + other.y2 * y2 + other.z2 * y3,    
-        other.x2 * z1 + other.y2 * z2 + other.z2 * x3,    
+        other.x2 * z1 + other.y2 * z2 + other.z2 * z3,    
         other.x3 * x1 + other.y3 * x2 + other.z3 * x3,    
         other.x3 * y1 + other.y3 * y2 + other.z3 * y3,    
-        other.x3 * z1 + other.y3 * z2 + other.z3 * x3,    
+        other.x3 * z1 + other.y3 * z2 + other.z3 * z3,    
       )
 
   operator fun times(other: Vec3) =
@@ -112,5 +121,6 @@ class Mat3(
          -sin(theta), cos(theta), 0.0,
           0.0,        0.0,        1.0,
         )
+  } 
 }
 

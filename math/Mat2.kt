@@ -6,7 +6,7 @@ class Mat2(val x1: Double, val y1: Double, val x2: Double, val y2: Double) : Lin
     get() = x1 * y2 - x2 * y1
 
   val inv: Mat2
-    get() = this / det
+    get() = Mat2(y2, -y1, -x2, x1) / det
 
   override fun plus(other: Mat2) =
       Mat2(

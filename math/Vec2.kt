@@ -13,6 +13,9 @@ class Vec2(val x: Double, val y: Double) : Linear<Vec2>{
     val unit: Vec2
       get() = this / magnitude
 
+    val xy0: Vec3
+      get() = Vec3(x, y, 0.0)
+
     fun setMagnitude(r: Double) = normalize() * r
 
     fun setTheta(theta: Angle) = polar(magnitude, theta)
